@@ -1,20 +1,23 @@
 <template>
-  <div> Hello forum {{ nom }} </div>
+  <div>
+    <input v-model="search" />
+    <div>fdshrgfygsqjfkfgrhghjq</div>
+
+    <div class="row">
+      <a v-for="uxPackage in words">
+        <h4>{{ uxPackage.name }}</h4>
+      </a>
+    </div>
+  </div>
 </template>
 
-<script>
-export default {
-  name: "Home",
+<script setup>
+import { computed, ref } from 'vue';
 
-  props: {
-    nom: {
-      type: String,
-      required: true
-    }
-  }
-}
+const props = defineProps({
+  words: Array,
+});
+
+const search = ref('');
+
 </script>
-
-<style scoped>
-
-</style>

@@ -18,16 +18,16 @@ class Atelier
 
 
     #[ORM\Column(length: 255)]
-    private ?string $nom_atelier = null;
+    private ?string $nomAtelier = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_atelier = null;
+    private ?\DateTimeInterface $dateAtelier = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $url_ressource = null;
+    private ?string $urlRessource = null;
 
     #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $pdf_ressource = null;
+    private $pdfRessource = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Salle $salle = null;
@@ -51,48 +51,48 @@ class Atelier
 
     public function getNomAtelier(): ?string
     {
-        return $this->nom_atelier;
+        return $this->nomAtelier;
     }
 
-    public function setNomAtelier(string $nom_atelier): self
+    public function setNomAtelier(string $nomAtelier): self
     {
-        $this->nom_atelier = $nom_atelier;
+        $this->nomAtelier = $nomAtelier;
 
         return $this;
     }
 
     public function getDateAtelier(): ?\DateTimeInterface
     {
-        return $this->date_atelier;
+        return $this->dateAtelier;
     }
 
-    public function setDateAtelier(\DateTimeInterface $date_atelier): self
+    public function setDateAtelier(\DateTimeInterface $dateAtelier): self
     {
-        $this->date_atelier = $date_atelier;
+        $this->dateAtelier = $dateAtelier;
 
         return $this;
     }
 
     public function getUrlRessource(): ?string
     {
-        return $this->url_ressource;
+        return $this->urlRessource;
     }
 
-    public function setUrlRessource(?string $url_ressource): self
+    public function setUrlRessource(?string $urlRessource): self
     {
-        $this->url_ressource = $url_ressource;
+        $this->urlRessource = $urlRessource;
 
         return $this;
     }
 
     public function getPdfRessource()
     {
-        return $this->pdf_ressource;
+        return $this->pdfRessource;
     }
 
-    public function setPdfRessource($pdf_ressource): self
+    public function setPdfRessource($pdfRessource): self
     {
-        $this->pdf_ressource = $pdf_ressource;
+        $this->pdfRessource = $pdfRessource;
 
         return $this;
     }

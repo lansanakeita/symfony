@@ -16,7 +16,7 @@ class Competence
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $nom_competence = null;
+    private ?string $nomCompetence = null;
 
     #[ORM\ManyToMany(targetEntity: Metier::class, inversedBy: 'competences')]
     private Collection $metier;
@@ -33,12 +33,12 @@ class Competence
 
     public function getNomCompetence(): ?string
     {
-        return $this->nom_competence;
+        return $this->nomCompetence;
     }
 
-    public function setNomCompetence(string $nom_competence): self
+    public function setNomCompetence(string $nomCompetence): self
     {
-        $this->nom_competence = $nom_competence;
+        $this->nomCompetence = $nomCompetence;
 
         return $this;
     }
