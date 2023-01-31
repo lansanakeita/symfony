@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\SpeakerRepository;
+use App\Repository\IntervenantRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SpeakerRepository::class)]
-class Speaker
+#[ORM\Entity(repositoryClass: IntervenantRepository::class)]
+class Intervenant
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -15,6 +15,9 @@ class Speaker
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $company = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -29,6 +32,18 @@ class Speaker
     public function setCompany(?string $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

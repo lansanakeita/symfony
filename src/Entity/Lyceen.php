@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\StudentRepository;
+use App\Repository\LyceenRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: StudentRepository::class)]
-class Student
+#[ORM\Entity(repositoryClass: LyceenRepository::class)]
+class Lyceen
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,6 +16,10 @@ class Student
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $class = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -32,4 +36,17 @@ class Student
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+    
 }
