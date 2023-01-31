@@ -27,6 +27,12 @@ class Participation
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $creaneau = null;
 
+    #[ORM\ManyToOne(inversedBy: 'participation')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne]
+    private ?Atelier $atelier = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +83,30 @@ class Participation
     public function setCreaneau(\DateTimeInterface $creaneau): self
     {
         $this->creaneau = $creaneau;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAtelier(): ?Atelier
+    {
+        return $this->atelier;
+    }
+
+    public function setAtelier(?Atelier $atelier): self
+    {
+        $this->atelier = $atelier;
 
         return $this;
     }
