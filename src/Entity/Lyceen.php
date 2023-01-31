@@ -19,6 +19,9 @@ class Lyceen
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    #[ORM\ManyToOne]
+    private ?Lycee $lycee = null;
+
     
     public function getId(): ?int
     {
@@ -45,6 +48,18 @@ class Lyceen
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getLycee(): ?Lycee
+    {
+        return $this->lycee;
+    }
+
+    public function setLycee(?Lycee $lycee): self
+    {
+        $this->lycee = $lycee;
 
         return $this;
     }
