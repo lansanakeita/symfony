@@ -2,6 +2,18 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Activite;
+use App\Entity\Atelier;
+use App\Entity\Competence;
+use App\Entity\EditionParticipation;
+use App\Entity\Intervenant;
+use App\Entity\Lycee;
+use App\Entity\Lyceen;
+use App\Entity\Metier;
+use App\Entity\Participation;
+use App\Entity\Question;
+use App\Entity\Questionnaire;
+use App\Entity\Reponse;
 use App\Entity\ReponsePossible;
 use App\Entity\Salle;
 use App\Entity\Secteur;
@@ -30,18 +42,12 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        
         yield MenuItem::linkToDashboard('Accueil', 'fa fa-home');
+        yield MenuItem::linkToCrud('Activites', 'fas fa-globe', Activite::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Salle', 'fas fa-list', Salle::class);
         yield MenuItem::linkToCrud('Réponse_Possibles', 'fas fa-list', ReponsePossible::class);
         yield MenuItem::linkToCrud('Secteurs', 'fas fa-list', Secteur::class);
-        yield MenuItem::linkToCrud('Activités', 'fas fa-globe', Secteur::class);
-        yield MenuItem::linkToCrud('Compétences', 'fas fa-list', Secteur::class);
-        yield MenuItem::linkToCrud('Ateliers', 'fas fa-list', Secteur::class);
-        yield MenuItem::linkToCrud('EditionParticipation', 'fas fa-list', Secteur::class);
-        yield MenuItem::linkToCrud('Reponse', 'fas fa-list', Reponse::class);
-        yield MenuItem::linkToCrud('Questionnaire', 'fas fa-list', Questionnaire::class);
-        yield MenuItem::linkToCrud('Question', 'fas fa-list', Question::class);
-        yield MenuItem::linkToCrud('Participation', 'fas fa-list', Participation::class);
     }
 }
