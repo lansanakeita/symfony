@@ -16,7 +16,7 @@ class Activite
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $nom_activite = null;
+    private ?string $nomActivite = null;
 
     #[ORM\ManyToMany(targetEntity: Metier::class, inversedBy: 'activite')]
     private Collection $metier;
@@ -33,12 +33,12 @@ class Activite
 
     public function getNomActivite(): ?string
     {
-        return $this->nom_activite;
+        return $this->nomActivite;
     }
 
     public function setNomActivite(string $nom_activite): self
     {
-        $this->nom_activite = $nom_activite;
+        $this->nomActivite = $nom_activite;
 
         return $this;
     }

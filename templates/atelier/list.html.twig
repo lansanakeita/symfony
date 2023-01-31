@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AtelierController!{% endblock %}
+
+{% block body %}
+     <h1>Liste de tous les ateliers du forum</h1>
+          <ol>
+               {% for atelier in ateliers %}
+                    <li> {{ atelier.nomAtelier }} </li>
+               {% endfor %}
+          </ol>
+{% endblock %}
