@@ -16,6 +16,12 @@ class Reponse
     #[ORM\Column(length: 250)]
     private ?string $reponse = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reponse')]
+    private ?Question $question = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reponses')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +35,30 @@ class Reponse
     public function setReponse(string $reponse): self
     {
         $this->reponse = $reponse;
+
+        return $this;
+    }
+
+    public function getQuestion(): ?Question
+    {
+        return $this->question;
+    }
+
+    public function setQuestion(?Question $question): self
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

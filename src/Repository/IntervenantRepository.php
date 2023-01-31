@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Speaker;
+use App\Entity\Intervenant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Speaker>
  *
- * @method Speaker|null find($id, $lockMode = null, $lockVersion = null)
- * @method Speaker|null findOneBy(array $criteria, array $orderBy = null)
- * @method Speaker[]    findAll()
- * @method Speaker[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Intervenant|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Intervenant|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Intervenant[]    findAll()
+ * @method Intervenant[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SpeakerRepository extends ServiceEntityRepository
+class IntervenantRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Speaker::class);
+        parent::__construct($registry, Intervenant::class);
     }
 
-    public function save(Speaker $entity, bool $flush = false): void
+    public function save(Intervenant $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class SpeakerRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Speaker $entity, bool $flush = false): void
+    public function remove(Intervenant $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class SpeakerRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Speaker[] Returns an array of Speaker objects
+//     * @return Intervenant[] Returns an array of Intervenant objects
 //     */
 //    public function findByExampleField($value): array
 //    {
