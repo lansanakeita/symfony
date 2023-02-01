@@ -17,7 +17,7 @@ class Intervenant
     private ?string $company = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?User $user = null;
+    private ?Users $users = null;
 
     public function getId(): ?int
     {
@@ -36,14 +36,14 @@ class Intervenant
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUsers(): ?Users
     {
-        return $this->user;
+        return $this->users;
     }
 
-    public function setUser(?User $user): self
+    public function setUsers(?Users $users): self
     {
-        $this->user = $user;
+        $this->users = $users;
 
         return $this;
     }
