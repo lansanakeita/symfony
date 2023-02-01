@@ -49,5 +49,10 @@ class Lyceen extends User
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return (String)$this->class;
+    }
     
 }
