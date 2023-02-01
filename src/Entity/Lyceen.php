@@ -17,7 +17,7 @@ class Lyceen
     private ?string $class = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?User $user = null;
+    private ?Users $users = null;
 
     #[ORM\ManyToOne]
     private ?Lycee $lycee = null;
@@ -40,14 +40,14 @@ class Lyceen
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUsers(): ?Users
     {
-        return $this->user;
+        return $this->users;
     }
 
-    public function setUser(?User $user): self
+    public function setUsers(?Users $users): self
     {
-        $this->user = $user;
+        $this->users = $users;
 
         return $this;
     }
