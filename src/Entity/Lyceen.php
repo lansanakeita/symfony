@@ -6,7 +6,7 @@ use App\Repository\LyceenRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LyceenRepository::class)]
-class Lyceen
+class Lyceen extends User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -15,9 +15,6 @@ class Lyceen
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $class = null;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Users $users = null;
 
     #[ORM\ManyToOne]
     private ?Lycee $lycee = null;
@@ -40,17 +37,6 @@ class Lyceen
         return $this;
     }
 
-    public function getUsers(): ?Users
-    {
-        return $this->users;
-    }
-
-    public function setUsers(?Users $users): self
-    {
-        $this->users = $users;
-
-        return $this;
-    }
 
     public function getLycee(): ?Lycee
     {

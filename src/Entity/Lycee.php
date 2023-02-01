@@ -32,4 +32,9 @@ class Lycee
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return (String)$this->nom;
+    }
 }
