@@ -14,31 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class AtelierController extends AbstractController
 {
 
-
-    #[Route('/atelier', name: 'app_atelier')]
-    public function index(
-        Atelier $atelier = null,
-        Request $request,
-        EntityManagerInterface $entityManager
-    )
-    {
-        if (!$atelier){
-            $atelier = new Atelier();
-        }
-
-        $form = $this->createForm(AtelierFormType::class, $atelier);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($atelier);
-            $entityManager->flush();
-        }
-
-        return $this->render('atelier/form.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
     #[Route('/list_atelier', name: 'app_list_atelier')]
     public function listAteliers(AtelierRepository $atelierRepository): Response
     {
@@ -46,6 +21,15 @@ class AtelierController extends AbstractController
        //dd($ateliers);
         return $this->render('atelier/list.html.twig', [
             'ateliers' => $ateliers,
+        ]);
+    }
+
+
+    #[Route('/detail_atelier/{id}', name: 'app_detail_atelier')]
+    public function detailAtelier($id, AtelierRepository $atelierRepository){
+        $atelier = $atelierRepository->find($id);
+        return $this->render('atelier/detail.html.twig', [
+            'atelier' => $atelier,
         ]);
     }
 }
