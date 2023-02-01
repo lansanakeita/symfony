@@ -28,7 +28,7 @@ class Participation
     private ?\DateTimeInterface $creaneau = null;
 
     #[ORM\ManyToOne(inversedBy: 'participation')]
-    private ?Users $users = null;
+    private ?User $User = null;
 
     #[ORM\ManyToOne]
     private ?Atelier $atelier = null;
@@ -87,14 +87,14 @@ class Participation
         return $this;
     }
 
-    public function getUsers(): ?Users
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->User;
     }
 
-    public function setUsers(?Users $users): self
+    public function setUser(?User $User): self
     {
-        $this->users = $users;
+        $this->User = $User;
 
         return $this;
     }
