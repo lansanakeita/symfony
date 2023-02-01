@@ -19,6 +19,10 @@ class Intervenant
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $User = null;
 
+    #[ORM\ManyToOne(inversedBy: 'intervenant')]
+    private ?Atelier $atelier = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -47,4 +51,23 @@ class Intervenant
 
         return $this;
     }
+
+    public function getAtelier(): ?Atelier
+    {
+        return $this->atelier;
+    }
+
+    public function setAtelier(?Atelier $atelier): self
+    {
+        $this->atelier = $atelier;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return (String)$this->users->getFirstName() . " " . $this->users->getLastName();
+    }
+
+
 }

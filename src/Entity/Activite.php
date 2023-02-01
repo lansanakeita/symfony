@@ -18,12 +18,12 @@ class Activite
     #[ORM\Column(length: 100)]
     private ?string $nomActivite = null;
 
-    #[ORM\ManyToMany(targetEntity: Metier::class, inversedBy: 'activite')]
-    private Collection $metier;
+    #[ORM\ManyToOne(inversedBy: 'activite')]
+    private ?Metier $metier = null;
+
 
     public function __construct()
     {
-        $this->metier = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,27 +43,17 @@ class Activite
         return $this;
     }
 
-    /**
-     * @return Collection<int, Metier>
-     */
-    public function getMetier(): Collection
+    public function getMetier(): ?Metier
     {
         return $this->metier;
     }
 
-    public function addMetier(Metier $metier): self
+    public function setMetier(?Metier $metier): self
     {
-        if (!$this->metier->contains($metier)) {
-            $this->metier->add($metier);
-        }
+        $this->metier = $metier;
 
         return $this;
     }
 
-    public function removeMetier(Metier $metier): self
-    {
-        $this->metier->removeElement($metier);
 
-        return $this;
-    }
 }
