@@ -50,5 +50,16 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Réponse_Possibles', 'fas fa-list', ReponsePossible::class);
         yield MenuItem::linkToCrud('Secteurs', 'fas fa-list', Secteur::class);
         yield MenuItem::linkToCrud('Atelier', 'fas fa-list', Atelier::class);
+        yield MenuItem::linkToCrud('Compétence', 'fas fa-list', Competence::class);
+        yield MenuItem::linkToCrud('Intervenant', 'fas fa-list', Intervenant::class);
+        yield MenuItem::linkToCrud('EditionParticipation', 'fas fa-list', EditionParticipation::class);
+        yield MenuItem::linkToCrud('Lycee', 'fas fa-list', Lycee::class);
+        yield MenuItem::linkToCrud('Lyceen', 'fas fa-list', Lyceen::class);
+        yield MenuItem::linkToCrud('Metier', 'fas fa-list', Metier::class);
+        yield MenuItem::linkToCrud('Question', 'fas fa-list', Question::class);
+        yield MenuItem::linkToCrud('Questionnaire', 'fas fa-list', Questionnaire::class);
+        yield MenuItem::linkToCrud('Reponse', 'fas fa-list', Reponse::class);
+        yield MenuItem::linkToCrud('ReponsePossible', 'fas fa-list', ReponsePossible::class);
+        yield MenuItem::linkToCrud('Participation', 'fas fa-list', Participation::class);
     }
 }
