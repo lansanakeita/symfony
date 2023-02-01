@@ -5,4 +5,90 @@
 {% endblock %}
 
 {% block body %}
+    <div class="d-flex flex-column mx-auto my-1 bg-secondary w-50">
+        <div class="d-flex flex-column align-items-center justify-content-center">
+            <img src="/pictures/logoforum.png" alt="" class="w-50 h-25">
+            <h2 class="text-info mt-2">
+                {{ atelier.nomAtelier }} {{ atelier.secteur.nom }}
+            </h2>
+        </div>
+
+        <div class="blockquote">
+            {{ atelier.secteur.description }}
+        </div>
+
+
+
+        <div class="w-100 d-flex flex-column fs-5 mx-2 gap-3">
+            <div class="d-flex w-100">
+                <div class="w-25 text-decoration-underline">
+                    Secteur :
+                </div>
+                <div class="w-50 text-capitalize d-flex align-items-center justify-content-start text-info">
+                    {{ atelier.secteur.nom }}
+                </div>
+            </div>
+
+            <div class="d-flex w-100">
+                <div class="w-25 text-decoration-underline">
+                    Intervenant :
+                </div>
+                <div class="w-50 text-capitalize d-flex align-items-center justify-content-start text-info">
+                    jack daniel
+                </div>
+            </div>
+
+            <div class="d-flex w-100">
+                <div class="w-25 text-decoration-underline">
+                    Date :
+                </div>
+                <div class="w-50 text-capitalize d-flex align-items-center justify-content-start text-info">
+                    {{ atelier.dateAtelier | localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y') }}
+                </div>
+            </div>
+
+            <div class="d-flex w-100">
+                <div class="w-25 text-decoration-underline">
+                    Heure :
+                </div>
+                <div class="w-50 text-capitalize d-flex align-items-center justify-content-start text-info">
+                    {{ atelier.dateAtelier | localizeddate('none', 'none', null, null, 'HH:MM') }}
+                </div>
+            </div>
+
+            <div class="d-flex w-100">
+                <div class="w-25 text-decoration-underline">
+                    Salle :
+                </div>
+                <div class="w-50 text-capitalize d-flex align-items-center justify-content-start text-info">
+                    {{ atelier.salle.nom }}
+                </div>
+            </div>
+
+
+            {% if atelier.urlRessource != null %}
+                <div class="d-flex w-100">
+                    <div class="w-25 text-decoration-underline">
+                        Document PDF :
+                    </div>
+                    <div class="w-50 text-capitalize d-flex align-items-center justify-content-center text-info">
+                        {{ atelier.dateAtelier | localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y') }}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if atelier.pdfRessource != null %}
+                <div class="d-flex w-100">
+                    <div class="w-25 text-decoration-underline">
+                        Document PDF :
+                    </div>
+                    <div class="w-50 text-capitalize d-flex align-items-center justify-content-center text-info">
+                        {{ atelier.dateAtelier | localizeddate('none', 'none', null, null, 'EEEE dd MMMM Y') }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+
+    </div>
 {% endblock %}

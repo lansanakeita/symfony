@@ -16,7 +16,23 @@ class Metier
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $nom_metier = null;
+    private ?string $nomMetier = null;
+
+    /**
+     * @return string|null
+     */
+    public function getNomMetier(): ?string
+    {
+        return $this->nomMetier;
+    }
+
+    /**
+     * @param string|null $nomMetier
+     */
+    public function setNomMetier(?string $nomMetier): void
+    {
+        $this->nomMetier = $nomMetier;
+    }
 
     // #[ORM\Column(length: 100)]
     // private ?string $activites = null;
@@ -24,16 +40,18 @@ class Metier
     #[ORM\ManyToMany(targetEntity: Atelier::class, mappedBy: 'metier')]
     private Collection $ateliers;
 
-    #[ORM\ManyToMany(targetEntity: Competence::class, mappedBy: 'metier')]
-    private Collection $competences;
 
-    #[ORM\ManyToMany(targetEntity: Activite::class, mappedBy: 'metier')]
+    #[ORM\OneToMany(mappedBy: 'metier', targetEntity: Competence::class)]
+    private Collection $competence;
+
+    #[ORM\OneToMany(mappedBy: 'metier', targetEntity: Activite::class)]
     private Collection $activite;
+
 
     public function __construct()
     {
         $this->ateliers = new ArrayCollection();
-        $this->competences = new ArrayCollection();
+        $this->competence = new ArrayCollection();
         $this->activite = new ArrayCollection();
     }
 
@@ -42,29 +60,8 @@ class Metier
         return $this->id;
     }
 
-    public function getNomMetier(): ?string
-    {
-        return $this->nom_metier;
-    }
 
-    public function setNomMetier(string $nom_metier): self
-    {
-        $this->nom_metier = $nom_metier;
 
-        return $this;
-    }
-
-    // public function getActivites(): ?string
-    // {
-    //     return $this->activites;
-    // }
-
-    // public function setActivites(string $activites): self
-    // {
-    //     $this->activites = $activites;
-
-    //     return $this;
-    // }
 
     /**
      * @return Collection<int, Atelier>
@@ -92,20 +89,26 @@ class Metier
 
         return $this;
     }
+    
+
+    public function __toString()
+    {
+        return (String)$this->nomMetier;
+    }
 
     /**
      * @return Collection<int, Competence>
      */
-    public function getCompetences(): Collection
+    public function getCompetence(): Collection
     {
-        return $this->competences;
+        return $this->competence;
     }
 
     public function addCompetence(Competence $competence): self
     {
-        if (!$this->competences->contains($competence)) {
-            $this->competences->add($competence);
-            $competence->addMetier($this);
+        if (!$this->competence->contains($competence)) {
+            $this->competence->add($competence);
+            $competence->setMetier($this);
         }
 
         return $this;
@@ -113,8 +116,11 @@ class Metier
 
     public function removeCompetence(Competence $competence): self
     {
-        if ($this->competences->removeElement($competence)) {
-            $competence->removeMetier($this);
+        if ($this->competence->removeElement($competence)) {
+            // set the owning side to null (unless already changed)
+            if ($competence->getMetier() === $this) {
+                $competence->setMetier(null);
+            }
         }
 
         return $this;
@@ -132,7 +138,7 @@ class Metier
     {
         if (!$this->activite->contains($activite)) {
             $this->activite->add($activite);
-            $activite->addMetier($this);
+            $activite->setMetier($this);
         }
 
         return $this;
@@ -141,9 +147,14 @@ class Metier
     public function removeActivite(Activite $activite): self
     {
         if ($this->activite->removeElement($activite)) {
-            $activite->removeMetier($this);
+            // set the owning side to null (unless already changed)
+            if ($activite->getMetier() === $this) {
+                $activite->setMetier(null);
+            }
         }
 
         return $this;
     }
+
+
 }

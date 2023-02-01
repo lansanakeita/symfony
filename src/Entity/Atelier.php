@@ -38,9 +38,14 @@ class Atelier
     #[ORM\ManyToMany(targetEntity: Metier::class, inversedBy: 'ateliers')]
     private Collection $metier;
 
+    #[ORM\OneToMany(mappedBy: 'atelier', targetEntity: Intervenant::class)]
+    private Collection $intervenant;
+
+
     public function __construct()
     {
         $this->metier = new ArrayCollection();
+        $this->intervenant = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,4 +149,41 @@ class Atelier
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return (String)$this->nomAtelier;
+    }
+
+    /**
+     * @return Collection<int, Intervenant>
+     */
+    public function getIntervenant(): Collection
+    {
+        return $this->intervenant;
+    }
+
+    public function addIntervenant(Intervenant $intervenant): self
+    {
+        if (!$this->intervenant->contains($intervenant)) {
+            $this->intervenant->add($intervenant);
+            $intervenant->setAtelier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIntervenant(Intervenant $intervenant): self
+    {
+        if ($this->intervenant->removeElement($intervenant)) {
+            // set the owning side to null (unless already changed)
+            if ($intervenant->getAtelier() === $this) {
+                $intervenant->setAtelier(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }
