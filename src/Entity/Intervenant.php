@@ -6,7 +6,7 @@ use App\Repository\IntervenantRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IntervenantRepository::class)]
-class Intervenant
+class Intervenant extends User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
