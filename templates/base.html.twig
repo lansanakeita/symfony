@@ -19,17 +19,6 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-
-        {% if app.user %} 
-
-            <a class="btn btn-primary" href="{{path('app_logout')}}"> Déconnexion </a>
-
-        {% endif %}
-
-
-
-    
-        
+        {% block body %}{% endblock %}        
     </body>
 </html>

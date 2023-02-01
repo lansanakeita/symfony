@@ -16,9 +16,6 @@ class Intervenant
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $company = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?User $User = null;
-
     #[ORM\ManyToOne(inversedBy: 'intervenant')]
     private ?Atelier $atelier = null;
 
@@ -40,18 +37,6 @@ class Intervenant
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->User;
-    }
-
-    public function setUser(?User $User): self
-    {
-        $this->User = $User;
-
-        return $this;
-    }
-
     public function getAtelier(): ?Atelier
     {
         return $this->atelier;
@@ -64,10 +49,6 @@ class Intervenant
         return $this;
     }
 
-    public function __toString()
-    {
-        return (String)$this->users->getFirstName() . " " . $this->users->getLastName();
-    }
 
 
 }

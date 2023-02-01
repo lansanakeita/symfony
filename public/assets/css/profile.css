@@ -1,0 +1,34 @@
+#example-sidenav{
+    background-color: #7B8A8B;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#elt {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    font-size: x-large;
+    color: white;
+}
+
+#deco {
+    background-color: red;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#titre_profile {
+    color: cadetblue;
+}
+
+#espace {
+    margin-bottom: 10px;
+}
+
+.col-xs3 {
+    font-weight: bold;
+}
