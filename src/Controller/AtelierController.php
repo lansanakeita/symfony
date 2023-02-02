@@ -18,7 +18,6 @@ class AtelierController extends AbstractController
     public function listAteliers(AtelierRepository $atelierRepository): Response
     {
         $ateliers = $atelierRepository->findAll();
-       //dd($ateliers);
         return $this->render('atelier/list.html.twig', [
             'ateliers' => $ateliers,
         ]);

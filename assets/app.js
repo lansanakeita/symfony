@@ -5,7 +5,16 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-import { registerVueControllerComponents } from '@symfony/ux-vue';
+//import { registerVueControllerComponents } from '@symfony/ux-vue';
+
+
+
+import { createApp } from 'vue';
+import Acceuil from "./vue/controllers/Acceuil.vue";
+
+createApp(Acceuil).mount('#vue-app');
+
+
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
@@ -23,7 +32,7 @@ import './bootstrap';
 // By putting only controller components in `vue/controllers`, you ensure that
 // internal components won't be automatically included in your JS built file if
 // they are not necessary.
-registerVueControllerComponents(require.context('./vue/controllers', true, /\.vue$/));
+//registerVueControllerComponents(require.context('./vue/controllers', true, /\.vue$/));
 
 // If you prefer to lazy-load your Vue.js controller components, in order to reduce to keep the JavaScript bundle the smallest as possible,
 // and improve performances, you can use the following line instead:
