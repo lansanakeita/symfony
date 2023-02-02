@@ -22,24 +22,18 @@
 		<div id="espace" class="col-xs3">{{ app.user.phone }}</div>
 	</div>
 
+
 	<div class="grix xs4 container">
 		<div class="col-xs4">
-
-		{% if is_granted('ROLE_ADMIN') %}
-			lansana KEITA
-
-		{% else %}
-
-			{% for liste in app.user.participations %}
-				{% if liste %}
-					<h1>Mes participations aux ateliers</h1>
-					{{ liste.atelier.nomAtelier }}
-				{% endif %}
-			{% endfor %}
-			
-		{% endif %}
-			
+			<h1>Mes participations aux ateliers</h1>
 		</div>
 	</div>
+		{# <div class="col-xs4">
+            <a href="#" class="btn blue">Modifier le profil</a>
+            <a href="#" class="btn blue">Modifier le mot de passe</a>
+    </div> #}
+
+			{# <h1>{{ app.user.firstName }} {{ app.user.lastName }} </h1> #}
+
 		
 {% endblock %}
