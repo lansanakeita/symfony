@@ -17,11 +17,4 @@ class ProfileController extends AbstractController
             //'participations' => $participations
         ]);
     }
-
-    #[Route('/profileAdmin', name: 'profileAdmin')]
-    public function profileAdmin(): Response
-    {
-        return $this->render('profile/profileAdmin.html.twig', [
-        ]);
-    }
 }
