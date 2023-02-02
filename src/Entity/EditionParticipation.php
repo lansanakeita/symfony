@@ -17,8 +17,8 @@ class EditionParticipation
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $year = null;
 
-    #[ORM\ManyToOne]
-    private ?Intervenant $intervenant = null;
+    // #[ORM\ManyToOne]
+    // private ?Intervenant $intervenant = null;
 
     public function getId(): ?int
     {
@@ -37,15 +37,15 @@ class EditionParticipation
         return $this;
     }
 
-    public function getIntervenant(): ?Intervenant
-    {
-        return $this->intervenant;
-    }
+    // public function getIntervenant(): ?Intervenant
+    // {
+    //     return $this->intervenant;
+    // }
 
-    public function setIntervenant(?Intervenant $intervenant): self
-    {
-        $this->intervenant = $intervenant;
+    // public function setIntervenant(?Intervenant $intervenant): self
+    // {
+    //     $this->intervenant = $intervenant;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

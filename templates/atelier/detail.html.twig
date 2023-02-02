@@ -65,7 +65,6 @@
                 </div>
             </div>
 
-
             {% if atelier.urlRessource != null %}
                 <div class="d-flex w-100">
                     <div class="w-25 text-decoration-underline">
@@ -89,6 +88,34 @@
             {% endif %}
         </div>
 
+        <div class="text-center">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success"> {{ message }}</div>
+            {% endfor %}
+        </div>
+        {{form_start(form)}}
+            {% set var = false %}
+        
+            {% for participation in app.user.participations %}
+                
+                {%  if  participation.atelier.id == atelier.id %}
+                    
+                    {% set var = true %}
+
+                    {% else %}
+                         {% set var = false %}
+                {% endif %}
+            {% endfor %}  
+
+             {% if var == false %}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" name="participer">participer</button>
+                </div>
+            {% endif %} 
+        {{form_end(form)}}
+       
+
+        
 
     </div>
 {% endblock %}

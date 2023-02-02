@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Profile!
+			{% endblock %}
+		</title>
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/css/axentix.min.css"> 
+		{% block stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="/assets/css/profile.css">
+	</head>
+	<body class="layout with-sidenav">
+		
+		<div id="example-sidenav" class="sidenav large fixed">
+			
+			<div id="elt"> 
+				<a href="{{path('app_home')}}">Accueil</a>
+				<a href="{{path('app_list_atelier')}}">Liste des ateliers</a>
+				<a href="{{path('app_logout')}}" id="deco">Déconnexion</a>
+
+				{% if is_granted('ROLE_ADMIN') %}
+					<a href="{{path('admin')}}" id="deco">Dashboard</a>
+				{% endif %}
+				
+			</div>
+		</div>
+		<main>
+			<button data-target="example-sidenav" class="btn press amaranth dark-1 sidenav-trigger hide-md-up">
+				Open sidenav
+			</button>
+			{% block body %}{% endblock %}
+		</main>
+
+		<script src="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/js/axentix.min.js"></script>
+		{% block javascripts %}{% endblock %}
+		<script>
+			var sidenav = new Sidenav('#example-sidenav');
+		</script>
+	</body>
+</html>

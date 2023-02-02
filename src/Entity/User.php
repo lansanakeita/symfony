@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,7 +23,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-   
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Participation::class)]
+    private Collection $participations;
 
     #[ORM\Column]
     private array $roles = [];
@@ -40,6 +43,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 100)]
     private ?string $phone = null;
+
+
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -163,4 +172,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
     
+
+    /**
+     * Get the value of participations
+     */ 
+    public function getParticipations()
+    {
+        return $this->participations;
+    }
+
+    /**
+     * Set the value of participations
+     *
+     * @return  self
+     */ 
+    public function setParticipations($participations)
+    {
+        $this->participations = $participations;
+
+        return $this;
+    }
 }

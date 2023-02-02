@@ -14,21 +14,14 @@ class Participation
     #[ORM\Column]
     private ?int $id = null;
 
+    // #[ORM\Column(type: Types::DATE_MUTABLE)]
+    // private ?\DateTimeInterface $date_inscription = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $id_utilisateur = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $role = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_inscription = null;
-
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $creaneau = null;
+    // #[ORM\Column(type: Types::TIME_MUTABLE)]
+    // private ?\DateTimeInterface $creaneau = null;
 
     #[ORM\ManyToOne(inversedBy: 'participation')]
-    private ?User $User = null;
+    private ?User $user = null;
 
     #[ORM\ManyToOne]
     private ?Atelier $atelier = null;
@@ -39,62 +32,38 @@ class Participation
     }
 
 
-    public function getIdUtilisateur(): ?string
-    {
-        return $this->id_utilisateur;
-    }
+    // public function getDateInscription(): ?\DateTimeInterface
+    // {
+    //     return $this->date_inscription;
+    // }
 
-    public function setIdUtilisateur(string $id_utilisateur): self
-    {
-        $this->id_utilisateur = $id_utilisateur;
+    // public function setDateInscription(\DateTimeInterface $date_inscription): self
+    // {
+    //     $this->date_inscription = $date_inscription;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
+    // public function getCreaneau(): ?\DateTimeInterface
+    // {
+    //     return $this->creaneau;
+    // }
 
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
+    // public function setCreaneau(\DateTimeInterface $creaneau): self
+    // {
+    //     $this->creaneau = $creaneau;
 
-        return $this;
-    }
-
-    public function getDateInscription(): ?\DateTimeInterface
-    {
-        return $this->date_inscription;
-    }
-
-    public function setDateInscription(\DateTimeInterface $date_inscription): self
-    {
-        $this->date_inscription = $date_inscription;
-
-        return $this;
-    }
-
-    public function getCreaneau(): ?\DateTimeInterface
-    {
-        return $this->creaneau;
-    }
-
-    public function setCreaneau(\DateTimeInterface $creaneau): self
-    {
-        $this->creaneau = $creaneau;
-
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;
     }
 
-    public function setUser(?User $User): self
+    public function setUser(?User $user): self
     {
-        $this->User = $User;
+        $this->user = $user;
 
         return $this;
     }

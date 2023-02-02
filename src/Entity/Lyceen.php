@@ -19,7 +19,12 @@ class Lyceen extends User
     #[ORM\ManyToOne]
     private ?Lycee $lycee = null;
 
-    
+    public function getIdParent()
+    {
+        return parent::getId();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -36,7 +41,6 @@ class Lyceen extends User
 
         return $this;
     }
-
 
     public function getLycee(): ?Lycee
     {
