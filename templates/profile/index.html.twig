@@ -26,14 +26,14 @@
 		<div class="col-xs4">
 
 		{% if is_granted('ROLE_ADMIN') %}
-			lansana KEITA
+			
 
 		{% else %}
 
 			{% for liste in app.user.participations %}
 				{% if liste %}
-					<h1>Mes participations aux ateliers</h1>
-					{{ liste.atelier.nomAtelier }}
+					<h1>Mes ateliers</h1>
+					<h3> <a href="/detail_atelier/{{ liste.atelier.id }}">{{ liste.atelier.nomAtelier }}</a></h3>
 				{% endif %}
 			{% endfor %}
 			

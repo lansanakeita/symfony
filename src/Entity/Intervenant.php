@@ -66,7 +66,7 @@ class Intervenant
 
     public function __toString()
     {
-        return (String)$this->users->getFirstName() . " " . $this->users->getLastName();
+        return (String)$this->User->getFirstName() . " " . $this->User->getLastName();
     }
 
 
