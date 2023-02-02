@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name:"type", type:"string")]
-#[ORM\DiscriminatorMap(["lyceen" =>"Lyceen"])]
+#[ORM\DiscriminatorMap(["lyceen" =>"Lyceen", "inter" =>"Intervenant"])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -21,7 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Participation::class)]
     private Collection $participations;
@@ -45,9 +45,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $phone = null;
 
 
+
     public function __construct()
     {
         $this->participations = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -92,25 +94,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
-
-    // public function getRoles(): array
-    // {
-    //     $roles = $this->roles;
-    //     // guarantee every user at least has ROLE_USER
-    //     $roles[] = 'ROLE_USER';
-
-    //     return array_unique($roles);
-    // }
-
-    // public function setRoles(array $roles): self
-    // {
-    //     $this->roles = $roles;
-
-    //     return $this;
-    // }
 
     /**
      * @see PasswordAuthenticatedUserInterface
@@ -170,6 +155,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->phone = $phone;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getFirstName();
     }
     
 
