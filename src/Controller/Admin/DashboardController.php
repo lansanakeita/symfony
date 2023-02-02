@@ -45,6 +45,8 @@ class DashboardController extends AbstractDashboardController
         
         yield MenuItem::linkToDashboard('Accueil', 'fa fa-home');
         yield MenuItem::linkToCrud('Activites', 'fas fa-globe', Activite::class);
+
+
         yield MenuItem::linkToCrud('Salle', 'fas fa-list', Salle::class);
         yield MenuItem::linkToCrud('Réponse_Possibles', 'fas fa-list', ReponsePossible::class);
         yield MenuItem::linkToCrud('Secteurs', 'fas fa-list', Secteur::class);
@@ -59,6 +61,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Questionnaire', 'fas fa-list', Questionnaire::class);
         yield MenuItem::linkToCrud('Reponse', 'fas fa-list', Reponse::class);
         yield MenuItem::linkToCrud('ReponsePossible', 'fas fa-list', ReponsePossible::class);
-        yield MenuItem::linkToCrud('Participation', 'fas fa-list', Participation::class);
+        // yield MenuItem::linkToCrud('Participation', 'fas fa-list', Participation::class);
     }
 }

@@ -50,5 +50,11 @@ class Intervenant extends User
     }
 
 
+    public function __toString()
+    {
+        return (String)$this->User->getFirstName() . " " . $this->User->getLastName();
+    }
+
+
 
 }
