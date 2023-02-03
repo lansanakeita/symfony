@@ -41,21 +41,12 @@ class LyceenRepository extends ServiceEntityRepository
 
     public function liste(){
         $entityManager = $this->getEntityManager();
-        // $query = $entityManager->createQuery(
-        //     'SELECT ecole.nom, COUNT(etudiant.nom)
-        //      FROM App\Entity\Lyceen etudiant
-        //      INNER JOIN App\Entity\Lycee ecole
-        //      WHERE etudiant.lycee = ecole
-        //      GROUP BY ecole.nom'
-        // );
-
         $query = $entityManager->createQuery(
-            'SELECT l FROM App\Entity\Lyceen l
+            'SELECT ecole.nom, COUNT(ecole.nom) FROM App\Entity\Lyceen etudiant
             INNER JOIN App\Entity\Lycee ecole
-            WHERE l.id = ecole.id
-            '
+            WHERE etudiant.lycee = ecole.id
+            GROUP BY ecole.nom'
         );
-    
         return $query->getResult();
     }
 

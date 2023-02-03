@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Atelier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\ResultStatement;
 
 /**
  * @extends ServiceEntityRepository<Atelier>
@@ -16,7 +19,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AtelierRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    
+
+    public function __construct(ManagerRegistry $registry,)
     {
         parent::__construct($registry, Atelier::class);
     }
@@ -38,6 +43,38 @@ class AtelierRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+
+    // public function listeAtelier()
+    // {
+    //     $sql = 'SELECT nom_atelier, COUNT(nom_atelier)
+    //         FROM `atelier` atelier JOIN lyceen etudiant JOIN atelier_lyceen atel_lyceen
+    //         WHERE atelier.id = atel_lyceen.atelier_id
+    //         AND etudiant.id = atel_lyceen.lyceen_id
+    //         GROUP BY atelier.id'
+    //     ;
+
+    //     $stmt = $this->connection->prepare($sql);
+    //     $stmt->execute();
+
+    //     return $stmt->fetchAll();
+    // }
+    
+    // public function listeAtelier(){
+    //     // $entityManager = $this->getEntityManager();
+    //     // $query = $entityManager->createQuery(
+    //     //     'SELECT atelier.nomAtelier, COUNT(atelier.nomAtelier) FROM App\Entity\Lyceen etudiant
+    //     //     INNER JOIN App\Entity\Atelier atelier
+    //     //     WHERE etudiant.lycee = atelier.id
+    //     //     GROUP BY atelier.nomAtelier'
+    //     // );
+    //     // return $query->getResult();
+
+    // }
+
+
+
+
 
 //    /**
 //     * @return Atelier[] Returns an array of Atelier objects

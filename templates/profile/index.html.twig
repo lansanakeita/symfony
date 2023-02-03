@@ -45,9 +45,8 @@
 		{% if is_granted('ROLE_ADMIN') %}
 			<hr>
 			
-
-			{% if lycees is defined %}
-				<h1>Détails des inscriptions</h1>
+			{% if lyceens is defined %}
+				<h2>Nombre de lycéen inscrit aux ateliers par Lycée</h2>
 
 				<table class="table table-bordered">
 					<thead>
@@ -57,15 +56,33 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for lycee in lycees %}
-							<tr>
-								<th scope="row">{{lycee.nom}}</th>
-								<th scope="row">{{lycee.nom}}</th>
-							</tr>
+						{% for lyceen in lyceens %}
+						<tr> 
+							<td>{{lyceen["nom"]}}</td> 
+							<td>{{lyceen["1"]}}</td> 
+						</tr> 
 						{% endfor %} 
 					</tbody>
 				</table>
 			{% endif %}
+
+			<h2>Nombre d'inscrit par forum</h2>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					<th scope="col">Atelier</th>
+					<th scope="col">Nbre Inscrit</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for lyceen in lyceens %}
+					<tr> 
+						<td>{{lyceen["nom"]}}</td> 
+						<td>{{lyceen["1"]}}</td> 
+					</tr> 
+					{% endfor %} 
+				</tbody>
+			</table>
 			
 		{% else %}
 
