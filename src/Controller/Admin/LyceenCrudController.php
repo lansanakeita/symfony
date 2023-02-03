@@ -14,23 +14,11 @@ class LyceenCrudController extends UserCrudController
         return Lyceen::class;
     }
 
-    // public function configureFields(string $pageName): iterable
-    // {
-    //     return array_merge(parent::configureFields($pageName), [
-    //         AssociationField::new('lycee'),
-    //         TextField::new('class'),
-    //     ]);
-    // }
-
-
-    /*
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        return array_merge(parent::configureFields($pageName), [
+            AssociationField::new('lycee'),
+            AssociationField::new('section'),
+        ]);
     }
-    */
 }

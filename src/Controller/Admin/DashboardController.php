@@ -17,6 +17,7 @@ use App\Entity\Reponse;
 use App\Entity\ReponsePossible;
 use App\Entity\Salle;
 use App\Entity\Secteur;
+use App\Entity\Section;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -58,6 +59,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Question', 'fas fa-list', Question::class);
         yield MenuItem::linkToCrud('Questionnaire', 'fas fa-list', Questionnaire::class);
         yield MenuItem::linkToCrud('Reponse', 'fas fa-list', Reponse::class);
+        yield MenuItem::linkToCrud('Section', 'fas fa-list', Section::class);
         yield MenuItem::linkToCrud('ReponsePossible', 'fas fa-list', ReponsePossible::class);
     }
 }

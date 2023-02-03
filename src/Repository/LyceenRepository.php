@@ -39,6 +39,26 @@ class LyceenRepository extends ServiceEntityRepository
         }
     }
 
+    public function liste(){
+        $entityManager = $this->getEntityManager();
+        // $query = $entityManager->createQuery(
+        //     'SELECT ecole.nom, COUNT(etudiant.nom)
+        //      FROM App\Entity\Lyceen etudiant
+        //      INNER JOIN App\Entity\Lycee ecole
+        //      WHERE etudiant.lycee = ecole
+        //      GROUP BY ecole.nom'
+        // );
+
+        $query = $entityManager->createQuery(
+            'SELECT l FROM App\Entity\Lyceen l
+            INNER JOIN App\Entity\Lycee ecole
+            WHERE l.id = ecole.id
+            '
+        );
+    
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Student[] Returns an array of Student objects
 //     */
