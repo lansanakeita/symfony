@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Lyceen;
-use App\Entity\Participation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +13,7 @@ class ParticiperFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-             //->add("inscription", SubmitType::class)
+            // ->add('Participer', SubmitType::class)
         ;
     }
 

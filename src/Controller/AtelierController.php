@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Atelier;
-use App\Entity\Lyceen;
+use App\Entity\Participation;
 use App\Form\AtelierFormType;
 use App\Form\ParticiperFormType;
 use App\Repository\AtelierRepository;
@@ -25,7 +25,7 @@ class AtelierController extends AbstractController
         $ateliers = $atelierRepository->findAll();
        //dd($ateliers);
         return $this->render('atelier/list.html.twig', [
-            'ateliers' => $ateliers,
+            'ateliers' => $ateliers, 
         ]);
     }
 
@@ -33,12 +33,13 @@ class AtelierController extends AbstractController
     #[Route('/detail_atelier/{id}', name: 'app_detail_atelier')]
     public function detailAtelier(
         Request $request,
-        $id,
+                $id,
         AtelierRepository $atelierRepository,
         EntityManagerInterface $entityManager
     )
     {
         $atelier = $atelierRepository->find($id);
+        $ateliers = $atelierRepository->findAll();
 
         //traitement avec le bouton participation
         $form = $this->createForm(ParticiperFormType::class, $this->getUser());
@@ -48,11 +49,12 @@ class AtelierController extends AbstractController
             $this->getUser()->addAtelier($atelier);
             $entityManager->persist($this->getUser());
             $entityManager->flush();
-            $this->addFlash('success', 'Inscription effectué avec succès');           
+            $this->addFlash('success', 'Inscription effectué avec succès');
         }
 
         return $this->render('atelier/detail.html.twig', [
             'atelier' => $atelier,
+            'ateliers' => $ateliers,
             'form' => $form->createView(),
         ]);
     }
