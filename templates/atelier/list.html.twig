@@ -5,24 +5,4 @@
 {% block body %}
      <div {{ vue_component('Navigation') }}></div>
      <div {{ vue_component('ListeAtelier') }}></div>
-
-<!--
-     <div class="mx-3 d-flex flex-wrap">
-        {#  {% for atelier in ateliers %} #}
-          <div class="card" style="width: 18rem;">
-               <img class="card-img-top" src="/pictures/logoforum.png" alt="">
-               <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                    <h5 class="card-title">
-                      {#    {{ atelier.nomAtelier }} {{ atelier.secteur.nom }} #}
-                    </h5>
-                    <p class="card-text">
-                      {# {{ atelier.secteur.description }} #}
-                    </p>
-                    <a href="/detail_atelier/{# {{ atelier.id }}#}" class="btn btn-primary">Voir plus</a>
-               </div>
-          </div>
-        {#   {% endfor %} #}
-     </div>
-     -->
-
 {% endblock %}

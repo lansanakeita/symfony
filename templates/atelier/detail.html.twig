@@ -93,8 +93,8 @@
                 <div class="alert alert-success"> {{ message }}</div>
             {% endfor %}
         </div>
-        {{form_start(form)}}
-            {% set var = false %}
+         {{form_start(form)}}
+        {#           {% set var = false %}
         
             {% for participation in app.user.participations %}
                 
@@ -105,13 +105,35 @@
                     {% else %}
                         {% set var = false %}
                 {% endif %}
-            {% endfor %}  
+            {% endfor %}  #}
 
-             {% if var == false %}
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" name="participer">participer</button>
+            {#  {% if var == false %} #}
+                <div
+                        class="form-group"
+                        style="
+                            display: flex;
+                            align-content: center;
+                            justify-content: center;
+                            margin-top: 10px;
+                              "
+                >
+                    <button
+                            type="submit"
+                            name="participer"
+                            style="
+                                cursor: pointer;
+                                padding: 10px;
+                                border-radius: 10px;
+                                text-align: center;
+                                background-color: #2C3E50;
+                                color: #FFFFFF;
+                                border-color: #FFFFFF;
+                                  "
+                    >
+                        participer
+                    </button>
                 </div>
-            {% endif %} 
+        {#     {% endif %} #}
         {{form_end(form)}}
 
     </div>
