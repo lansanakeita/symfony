@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Lyceen;
 use App\Entity\Participation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,14 +14,14 @@ class ParticiperFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('Participer', SubmitType::class)
+             //->add("inscription", SubmitType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Participation::class,
+            'data_class' => Lyceen::class,
         ]);
     }
 }
