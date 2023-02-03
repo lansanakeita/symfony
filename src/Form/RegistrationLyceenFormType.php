@@ -23,6 +23,7 @@ class RegistrationLyceenFormType extends RegistrationFormType
         $builder
            
             ->add('lycee')
+            ->add('section')
         ;
     }
 
