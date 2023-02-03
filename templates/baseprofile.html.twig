@@ -18,12 +18,16 @@
 			<div id="elt"> 
 				<a href="{{path('app_home')}}">Accueil</a>
 				<a href="{{path('app_list_atelier')}}">Liste des ateliers</a>
+
 				<a href="{{path('app_logout')}}" id="deco">Déconnexion</a>
 
 				{% if is_granted('ROLE_ADMIN') %}
 					<a href="{{path('admin')}}" id="deco">Dashboard</a>
 				{% endif %}
 				
+
+				<a href=""{{path('app_logout')}}"" id="deco">Déconnexion</a>
+
 			</div>
 		</div>
 		<main>
@@ -33,10 +37,18 @@
 			{% block body %}{% endblock %}
 		</main>
 
+
+
+
+
+
 		<script src="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/js/axentix.min.js"></script>
 		{% block javascripts %}{% endblock %}
 		<script>
 			var sidenav = new Sidenav('#example-sidenav');
 		</script>
+
+		{# <script src="{{ asset('js/scripts.js') }}"></script> #}
+
 	</body>
 </html>

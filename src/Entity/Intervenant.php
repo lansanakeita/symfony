@@ -18,11 +18,16 @@ class Intervenant extends User
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $company = null;
 
+
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
     #[ORM\ManyToMany(targetEntity: Atelier::class, mappedBy: 'intervenant')]
     private Collection $ateliers;
+
+    #[ORM\ManyToOne(inversedBy: 'intervenant')]
+    private ?Atelier $atelier = null;
+
 
     public function __construct()
     {
@@ -52,6 +57,7 @@ class Intervenant extends User
         return $this;
     }
 
+
     public function __toString()
     {
         return $this->getIdParent();
@@ -73,6 +79,9 @@ class Intervenant extends User
      * @return Collection<int, Atelier>
      */
     public function getAteliers(): Collection
+
+    public function getAtelier(): ?Atelier
+
     {
         return $this->ateliers;
     }
@@ -87,12 +96,19 @@ class Intervenant extends User
         return $this;
     }
 
+
     public function removeAtelier(Atelier $atelier): self
+
+
+    public function __toString()
+
     {
         if ($this->ateliers->removeElement($atelier)) {
             $atelier->removeIntervenant($this);
         }
 
+
         return $this;
     }
+
 }

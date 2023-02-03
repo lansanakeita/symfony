@@ -21,7 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+
 
     #[ORM\Column]
     private array $roles = [];
@@ -45,9 +45,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $lyceens;
 
 
+
     public function __construct()
     {
+
         $this->lyceens = new ArrayCollection();
+
+        $this->participations = new ArrayCollection();
+
+
     }
 
     public function getId(): ?int
@@ -92,14 +98,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
+
 
     public function __toString()
     {
         return $this->getFirstName() . " " . $this->getLastName();
     }
+
 
     /**
      * @see PasswordAuthenticatedUserInterface
@@ -160,6 +167,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+
+    public function __toString()
+    {
+        return $this->getFirstName();
+    }
+    
+
 
     /**
      * @return Collection<int, Lyceen>
