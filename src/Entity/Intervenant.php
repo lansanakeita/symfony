@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\IntervenantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IntervenantRepository::class)]
-class Intervenant
+class Intervenant extends User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,11 +19,21 @@ class Intervenant
     private ?string $company = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?User $User = null;
+    private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'intervenant')]
-    private ?Atelier $atelier = null;
+    #[ORM\ManyToMany(targetEntity: Atelier::class, mappedBy: 'intervenant')]
+    private Collection $ateliers;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->ateliers = new ArrayCollection();
+    }
+
+    public function getIdParent()
+    {
+        return parent::getFirstName() . " " . parent::getLastName();
+    }
 
     public function getId(): ?int
     {
@@ -40,34 +52,47 @@ class Intervenant
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->User;
-    }
-
-    public function setUser(?User $User): self
-    {
-        $this->User = $User;
-
-        return $this;
-    }
-
-    public function getAtelier(): ?Atelier
-    {
-        return $this->atelier;
-    }
-
-    public function setAtelier(?Atelier $atelier): self
-    {
-        $this->atelier = $atelier;
-
-        return $this;
-    }
-
     public function __toString()
     {
-        return (String)$this->User->getFirstName() . " " . $this->User->getLastName();
+        return $this->getIdParent();
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
 
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Atelier>
+     */
+    public function getAteliers(): Collection
+    {
+        return $this->ateliers;
+    }
+
+    public function addAtelier(Atelier $atelier): self
+    {
+        if (!$this->ateliers->contains($atelier)) {
+            $this->ateliers->add($atelier);
+            $atelier->addIntervenant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAtelier(Atelier $atelier): self
+    {
+        if ($this->ateliers->removeElement($atelier)) {
+            $atelier->removeIntervenant($this);
+        }
+
+        return $this;
+    }
 }

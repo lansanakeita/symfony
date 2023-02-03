@@ -29,23 +29,28 @@ class Atelier
     #[ORM\Column(type: Types::BLOB, nullable: true)]
     private $pdfRessource = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Salle $salle = null;
-
-    #[ORM\ManyToOne]
-    private ?Secteur $secteur = null;
 
     #[ORM\ManyToMany(targetEntity: Metier::class, inversedBy: 'ateliers')]
     private Collection $metier;
 
-    #[ORM\OneToMany(mappedBy: 'atelier', targetEntity: Intervenant::class)]
+
+    #[ORM\ManyToOne(inversedBy: 'ateliers')]
+    private ?Secteur $secteur = null;
+
+    #[ORM\ManyToOne(inversedBy: 'ateliers')]
+    private ?Salle $salle = null;
+
+    #[ORM\ManyToMany(targetEntity: Intervenant::class, inversedBy: 'ateliers')]
     private Collection $intervenant;
 
+    #[ORM\ManyToMany(targetEntity: Lyceen::class, inversedBy: 'ateliers')]
+    private Collection $lyceen;
 
     public function __construct()
     {
         $this->metier = new ArrayCollection();
         $this->intervenant = new ArrayCollection();
+        $this->lyceen = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,29 +107,7 @@ class Atelier
         return $this;
     }
 
-    public function getSalle(): ?Salle
-    {
-        return $this->salle;
-    }
-
-    public function setSalle(?Salle $salle): self
-    {
-        $this->salle = $salle;
-
-        return $this;
-    }
-
-    public function getSecteur(): ?Secteur
-    {
-        return $this->secteur;
-    }
-
-    public function setSecteur(?Secteur $secteur): self
-    {
-        $this->secteur = $secteur;
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, Metier>
@@ -155,6 +138,30 @@ class Atelier
         return (String)$this->nomAtelier;
     }
 
+    public function getSecteur(): ?Secteur
+    {
+        return $this->secteur;
+    }
+
+    public function setSecteur(?Secteur $secteur): self
+    {
+        $this->secteur = $secteur;
+
+        return $this;
+    }
+
+    public function getSalle(): ?Salle
+    {
+        return $this->salle;
+    }
+
+    public function setSalle(?Salle $salle): self
+    {
+        $this->salle = $salle;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Intervenant>
      */
@@ -167,7 +174,6 @@ class Atelier
     {
         if (!$this->intervenant->contains($intervenant)) {
             $this->intervenant->add($intervenant);
-            $intervenant->setAtelier($this);
         }
 
         return $this;
@@ -175,15 +181,33 @@ class Atelier
 
     public function removeIntervenant(Intervenant $intervenant): self
     {
-        if ($this->intervenant->removeElement($intervenant)) {
-            // set the owning side to null (unless already changed)
-            if ($intervenant->getAtelier() === $this) {
-                $intervenant->setAtelier(null);
-            }
+        $this->intervenant->removeElement($intervenant);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lyceen>
+     */
+    public function getLyceen(): Collection
+    {
+        return $this->lyceen;
+    }
+
+    public function addLyceen(Lyceen $lyceen): self
+    {
+        if (!$this->lyceen->contains($lyceen)) {
+            $this->lyceen->add($lyceen);
         }
 
         return $this;
     }
 
+    public function removeLyceen(Lyceen $lyceen): self
+    {
+        $this->lyceen->removeElement($lyceen);
+
+        return $this;
+    }
 
 }

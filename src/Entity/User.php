@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface; 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name:"type", type:"string")]
-#[ORM\DiscriminatorMap(["lyceen" =>"Lyceen"])]
+#[ORM\DiscriminatorMap(["lyceen" =>"Lyceen", "inter" =>"Intervenant"])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -22,9 +22,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Participation::class)]
-    private Collection $participations;
 
     #[ORM\Column]
     private array $roles = [];
@@ -44,10 +41,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100)]
     private ?string $phone = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Lyceen::class)]
+    private Collection $lyceens;
+
 
     public function __construct()
     {
-        $this->participations = new ArrayCollection();
+        $this->lyceens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,21 +96,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function getRoles(): array
-    // {
-    //     $roles = $this->roles;
-    //     // guarantee every user at least has ROLE_USER
-    //     $roles[] = 'ROLE_USER';
-
-    //     return array_unique($roles);
-    // }
-
-    // public function setRoles(array $roles): self
-    // {
-    //     $this->roles = $roles;
-
-    //     return $this;
-    // }
+    public function __toString()
+    {
+        return $this->getFirstName() . " " . $this->getLastName();
+    }
 
     /**
      * @see PasswordAuthenticatedUserInterface
@@ -171,24 +160,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    
 
     /**
-     * Get the value of participations
-     */ 
-    public function getParticipations()
+     * @return Collection<int, Lyceen>
+     */
+    public function getLyceens(): Collection
     {
-        return $this->participations;
+        return $this->lyceens;
     }
 
-    /**
-     * Set the value of participations
-     *
-     * @return  self
-     */ 
-    public function setParticipations($participations)
+    public function addLyceen(Lyceen $lyceen): self
     {
-        $this->participations = $participations;
+        if (!$this->lyceens->contains($lyceen)) {
+            $this->lyceens->add($lyceen);
+            $lyceen->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLyceen(Lyceen $lyceen): self
+    {
+        if ($this->lyceens->removeElement($lyceen)) {
+            // set the owning side to null (unless already changed)
+            if ($lyceen->getUser() === $this) {
+                $lyceen->setUser(null);
+            }
+        }
 
         return $this;
     }
