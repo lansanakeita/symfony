@@ -15,6 +15,27 @@ class IntervenantCrudController extends UserCrudController
         return Intervenant::class;
     }
 
+
+    public function configureFields(string $pageName): iterable
+    {
+        return array_merge(parent::configureFields($pageName), [
+            IdField::new('id')->hideOnForm(),
+            TextField::new('company'),
+            AssociationField::new('ateliers'),
+        ]);
+    }
+
+    /*
+    public function configureFields(string $pageName): iterable
+    {
+        return [
+            IdField::new('id'),
+            TextField::new('title'),
+            TextEditorField::new('description'),
+        ];
+    }
+    */
+
     
     public function configureFields(string $pageName): iterable
     {
@@ -23,4 +44,5 @@ class IntervenantCrudController extends UserCrudController
         ]);
     }
     
+
 }

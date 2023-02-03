@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface; 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\InheritanceType("JOINED")]
@@ -22,9 +22,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
 
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Participation::class)]
-    private Collection $participations;
 
     #[ORM\Column]
     private array $roles = [];
@@ -44,11 +41,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100)]
     private ?string $phone = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Lyceen::class)]
+    private Collection $lyceens;
+
 
 
     public function __construct()
     {
+
+        $this->lyceens = new ArrayCollection();
+
         $this->participations = new ArrayCollection();
+
 
     }
 
@@ -96,6 +100,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles = $roles;
         return $this;
     }
+
+
+    public function __toString()
+    {
+        return $this->getFirstName() . " " . $this->getLastName();
+    }
+
 
     /**
      * @see PasswordAuthenticatedUserInterface
@@ -157,28 +168,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     public function __toString()
     {
         return $this->getFirstName();
     }
     
 
-    /**
-     * Get the value of participations
-     */ 
-    public function getParticipations()
-    {
-        return $this->participations;
-    }
 
     /**
-     * Set the value of participations
-     *
-     * @return  self
-     */ 
-    public function setParticipations($participations)
+     * @return Collection<int, Lyceen>
+     */
+    public function getLyceens(): Collection
     {
-        $this->participations = $participations;
+        return $this->lyceens;
+    }
+
+    public function addLyceen(Lyceen $lyceen): self
+    {
+        if (!$this->lyceens->contains($lyceen)) {
+            $this->lyceens->add($lyceen);
+            $lyceen->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLyceen(Lyceen $lyceen): self
+    {
+        if ($this->lyceens->removeElement($lyceen)) {
+            // set the owning side to null (unless already changed)
+            if ($lyceen->getUser() === $this) {
+                $lyceen->setUser(null);
+            }
+        }
 
         return $this;
     }

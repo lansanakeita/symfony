@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SalleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SalleRepository::class)]
@@ -21,6 +23,14 @@ class Salle
 
     #[ORM\Column]
     private ?int $capicite = null;
+
+    #[ORM\OneToMany(mappedBy: 'salle', targetEntity: Atelier::class)]
+    private Collection $ateliers;
+
+    public function __construct()
+    {
+        $this->ateliers = new ArrayCollection();
+    }
 
     public function getNom(): ?string
     {
@@ -84,4 +94,35 @@ class Salle
     {
         return (String)$this->nom;
     }
+
+    /**
+     * @return Collection<int, Atelier>
+     */
+    public function getAteliers(): Collection
+    {
+        return $this->ateliers;
+    }
+
+    public function addAtelier(Atelier $atelier): self
+    {
+        if (!$this->ateliers->contains($atelier)) {
+            $this->ateliers->add($atelier);
+            $atelier->setSalle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAtelier(Atelier $atelier): self
+    {
+        if ($this->ateliers->removeElement($atelier)) {
+            // set the owning side to null (unless already changed)
+            if ($atelier->getSalle() === $this) {
+                $atelier->setSalle(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
