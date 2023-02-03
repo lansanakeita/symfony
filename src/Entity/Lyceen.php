@@ -15,9 +15,6 @@ class Lyceen extends User
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?string $class = null;
-
     #[ORM\ManyToOne]
     private ?Lycee $lycee = null;
 
@@ -26,6 +23,9 @@ class Lyceen extends User
 
     #[ORM\ManyToMany(targetEntity: Atelier::class, mappedBy: 'lyceen')]
     private Collection $ateliers;
+
+    #[ORM\ManyToOne(inversedBy: 'lyceens')]
+    private ?Section $section = null;
 
     public function __construct()
     {
@@ -36,18 +36,6 @@ class Lyceen extends User
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getClass(): ?string
-    {
-        return $this->class;
-    }
-
-    public function setClass(?string $class): self
-    {
-        $this->class = $class;
-
-        return $this;
     }
 
     public function getLycee(): ?Lycee
@@ -104,6 +92,18 @@ class Lyceen extends User
     public function getIdParent()
     {
         return parent::getFirstName() . " " . parent::getLastName();
+    }
+
+    public function getSection(): ?Section
+    {
+        return $this->section;
+    }
+
+    public function setSection(?Section $section): self
+    {
+        $this->section = $section;
+
+        return $this;
     }
     
 }
