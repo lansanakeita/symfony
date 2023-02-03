@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Bienvenue sur votre forum !
+{% endblock %}
+
+{% block body %}
+    <div {{ vue_component('Navigation') }}></div>
+    <div {{ vue_component('Home') }}></div>
+{% endblock %}

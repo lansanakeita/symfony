@@ -13,8 +13,9 @@ class HomeController extends AbstractController
     public function index(AtelierRepository $atelierRepository): Response
     {
         $ateliers = $atelierRepository->findAll();
-        return $this->render('home/index.html.twig', [
+        return $this->render('home/home.html.twig', [
             'ateliers' => $ateliers,
         ]);
     }
+
 }
