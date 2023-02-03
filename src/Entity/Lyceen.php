@@ -62,7 +62,6 @@ class Lyceen extends User
         return $this;
     }
 
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -105,11 +104,6 @@ class Lyceen extends User
     public function getIdParent()
     {
         return parent::getFirstName() . " " . parent::getLastName();
-
-    public function __toString()
-    {
-        return (String)$this->class;
-
     }
     
 }

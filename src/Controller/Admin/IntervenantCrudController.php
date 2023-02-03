@@ -15,7 +15,6 @@ class IntervenantCrudController extends UserCrudController
         return Intervenant::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return array_merge(parent::configureFields($pageName), [
@@ -35,14 +34,4 @@ class IntervenantCrudController extends UserCrudController
         ];
     }
     */
-
-    
-    public function configureFields(string $pageName): iterable
-    {
-        return array_merge(parent::configureFields($pageName), [
-            TextField::new('company'),
-        ]);
-    }
-    
-
 }
