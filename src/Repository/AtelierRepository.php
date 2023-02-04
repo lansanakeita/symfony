@@ -19,11 +19,12 @@ use Doctrine\DBAL\Driver\ResultStatement;
  */
 class AtelierRepository extends ServiceEntityRepository
 {
-    
+    private $connection;
 
-    public function __construct(ManagerRegistry $registry,)
+    public function __construct(ManagerRegistry $registry, Connection $connection)
     {
         parent::__construct($registry, Atelier::class);
+        $this->connection = $connection;
     }
 
     public function save(Atelier $entity, bool $flush = false): void
@@ -45,20 +46,20 @@ class AtelierRepository extends ServiceEntityRepository
     }
 
 
-    // public function listeAtelier()
-    // {
-    //     $sql = 'SELECT nom_atelier, COUNT(nom_atelier)
-    //         FROM `atelier` atelier JOIN lyceen etudiant JOIN atelier_lyceen atel_lyceen
-    //         WHERE atelier.id = atel_lyceen.atelier_id
-    //         AND etudiant.id = atel_lyceen.lyceen_id
-    //         GROUP BY atelier.id'
-    //     ;
+     public function inscritParAtelierPourLeForum()
+     {
+         $sql = 'SELECT nom_atelier, COUNT(nom_atelier) AS nb_inscrit, date_atelier
+             FROM `atelier` atelier JOIN lyceen etudiant JOIN atelier_lyceen atel_lyceen
+             WHERE atelier.id = atel_lyceen.atelier_id
+             AND etudiant.id = atel_lyceen.lyceen_id
+             GROUP BY atelier.id'
+         ;
 
-    //     $stmt = $this->connection->prepare($sql);
-    //     $stmt->execute();
+         $stmt = $this->connection->prepare($sql);
+         $stmt->execute();
 
-    //     return $stmt->fetchAll();
-    // }
+         return $this->connection->fetchAllAssociative($sql);
+     }
     
     // public function listeAtelier(){
     //     // $entityManager = $this->getEntityManager();

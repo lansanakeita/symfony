@@ -25,16 +25,17 @@ class AtelierController extends AbstractController
     public function listAteliers(AtelierRepository $atelierRepository): Response
     {
         $ateliers = $atelierRepository->findAll();
-       //dd($ateliers);
+        $z = $atelierRepository->inscritParAtelierPourLeForum();
+       //dd($z);
         return $this->render('atelier/list.html.twig', [
             'ateliers' => $ateliers, 
         ]);
     }
 
     #[Route('api/ateliers', name: 'app_get_ateliers', methods:['GET','HEAD'])]
-    public function allAteliers(AtelierRepository $repository): JsonResponse
+    public function allAteliersAPI(AtelierRepository $repository): JsonResponse
     {
-        $ateliers = $repository->findAll();
+        $ateliers = $repository->inscritParAtelierPourLeForum();
         return new JsonResponse($ateliers);
     }
 

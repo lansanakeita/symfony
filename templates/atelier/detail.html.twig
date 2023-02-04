@@ -34,11 +34,13 @@
                 <div class="w-25 text-decoration-underline">
                     Intervenant :
                 </div>
-                {% for intervenant in atelier.intervenant %}
-                    <div class="w-50 text-capitalize d-flex align-items-center justify-content-start text-info">
-                        {{ intervenant.firstName }} {{ intervenant.lastName }}
+                <div class="d-flex flex-column">
+                    {% for intervenant in atelier.intervenant %}
+                    <div class=" text-capitalize d-flex align-items-center justify-content-start text-info">
+                            {{ intervenant.firstName }} {{ intervenant.lastName }}
                     </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
 
 
@@ -73,11 +75,13 @@
                 <div class="w-25 text-decoration-underline">
                     Métier(s) :
                 </div>
-                {% for metier in atelier.metier %}
-                    <div class="w-50 text-capitalize d-flex align-items-center justify-content-start text-info">
-                        {{ metier.nomMetier }}
-                    </div>
-                {% endfor %}
+                <div class="d-flex flex-column">
+                    {% for metier in atelier.metier %}
+                        <div class="text-capitalize d-flex align-items-center justify-content-start text-info">
+                            {{ metier.nomMetier }}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
 
             {% if atelier.urlRessource != null %}
@@ -149,7 +153,7 @@
                     </button>
                 </div>
               {{form_end(form)}}
-              {% else %}
+              {% elseif alreadySubscribed == true or app.user.ateliers | length == 3 %}
                   {{ form_start(form_desinscrire) }}
                   <div
                           class="form-group"
@@ -178,7 +182,5 @@
                   </div>
                   {{ form_end(form_desinscrire) }}
              {% endif %}
-
-
     </div>
 {% endblock %}

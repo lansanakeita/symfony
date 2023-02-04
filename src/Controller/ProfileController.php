@@ -12,16 +12,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'profile')]
-    public function index(AtelierRepository $repoAtelier, LyceeRepository $repoLycee, LyceenRepository $repoLyceen): Response
+    public function index(
+        AtelierRepository $repoAtelier,
+        LyceenRepository $repoLyceen
+    ): Response
     {
-        // $lycees = $repoLycee->findAll();
-        $lyceens = $repoLyceen->liste();
-        $ateliers = $repoAtelier->findAll();
-        // $listeAtelier = $repoAtelier->listeAtelier();
-        // dd($listeAtelier);
+        $lyceens = $repoLyceen->inscritParLycee();
+        $inscritParAtelier = $repoAtelier->inscritParAtelierPourLeForum();
         return $this->render('profile/index.html.twig', [
-            'ateliers' => $ateliers, 
-            'lyceens' => $lyceens
+            'lyceens' => $lyceens,
+            'inscritParAtelier' => $inscritParAtelier
         ]);
     }
 }

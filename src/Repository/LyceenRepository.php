@@ -39,10 +39,11 @@ class LyceenRepository extends ServiceEntityRepository
         }
     }
 
-    public function liste(){
+    public function inscritParLycee(){
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT ecole.nom, COUNT(ecole.nom) FROM App\Entity\Lyceen etudiant
+            'SELECT ecole.nom, COUNT(ecole.nom) AS nb_inscrit
+            FROM App\Entity\Lyceen etudiant 
             INNER JOIN App\Entity\Lycee ecole
             WHERE etudiant.lycee = ecole.id
             GROUP BY ecole.nom'
