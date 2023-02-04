@@ -17,9 +17,11 @@ class ProfileController extends AbstractController
         LyceenRepository $repoLyceen
     ): Response
     {
+        $ateliers = $repoAtelier->findAll();
         $lyceens = $repoLyceen->inscritParLycee();
         $inscritParAtelier = $repoAtelier->inscritParAtelierPourLeForum();
         return $this->render('profile/index.html.twig', [
+            'ateliers' => $ateliers,
             'lyceens' => $lyceens,
             'inscritParAtelier' => $inscritParAtelier
         ]);

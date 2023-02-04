@@ -207,6 +207,7 @@ textarea.form-control, textarea.form-control:focus {
 	background-color: #2C3E50;
 	color: #FFFFFF;
 	border-color: #FFFFFF;
+	width: 150px;
 }
 
 #bouton_desinscrire {
@@ -217,6 +218,7 @@ textarea.form-control, textarea.form-control:focus {
 	background-color: darkred;
 	color: #FFFFFF;
 	border-color: #FFFFFF;
+	width: 150px;
 }
 
 #liste {
