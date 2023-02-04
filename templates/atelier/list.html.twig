@@ -2,51 +2,6 @@
 
 {% block title %}Liste des ateliers{% endblock %}
 
-{% block stylesheets %}
-<style>
-     #liste {
-          margin-top: 35px;
-     }
-
-     h2 {
-          padding: 10px;
-          color: #0c4a6e;
-     }
-
-     table {
-          width: 90%;
-          margin: auto;
-     }
-
-     #entete {
-          background-color: #2C3E50;
-          border: 5px solid #2C3E50;
-     }
-
-     #entete tr th, #corps tr {
-          color: #FFFFFF;
-     }
-
-     #entete tr th, #corps tr td {
-          padding: 10px;
-     }
-
-     #corps{
-          border: 5px solid #2C3E50
-     }
-
-     #corps tr {
-          cursor: pointer;
-     }
-
-
-
-     #corps tr td a {
-          text-decoration: none;
-          color: #1a2530;
-     }
-</style>
-{% endblock %}
 
 {% block body %}
      <div {{ vue_component('Navigation') }}></div>
