@@ -32,7 +32,7 @@ class EncryptDataCommand extends Command
     {
         $this->encryptservice->EncryptData();
 
-        $output->writeln("Commande réussie");
+        $output->writeln("Commande réussie : Données personnelles des utilisateurs chiffrées");
 
         return Command::SUCCESS;
     }

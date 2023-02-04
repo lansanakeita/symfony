@@ -46,39 +46,39 @@
 			<hr>
 			
 			{% if lyceens is defined %}
-				<h2>Nombre de lycéen inscrit aux ateliers par Lycée</h2>
+				<h2>Nombre d'inscrits par lycée</h2>
 
 				<table class="table table-bordered">
 					<thead>
 						<tr>
 						<th scope="col">Lycée</th>
-						<th scope="col">Nbre Inscrit</th>
+						<th scope="col">Nombre Inscrit</th>
 						</tr>
 					</thead>
 					<tbody>
 						{% for lyceen in lyceens %}
 						<tr> 
-							<td>{{lyceen["nom"]}}</td> 
-							<td>{{lyceen["1"]}}</td> 
+							<td> {{lyceen["nom"]}} </td>
+							<td> {{lyceen["nb_inscrit"]}} </td>
 						</tr> 
 						{% endfor %} 
 					</tbody>
 				</table>
 			{% endif %}
 
-			<h2>Nombre d'inscrit par forum</h2>
+			<h2>Nombre d'inscrits par atelier</h2>
 			<table class="table table-bordered">
 				<thead>
 					<tr>
 					<th scope="col">Atelier</th>
-					<th scope="col">Nbre Inscrit</th>
+					<th scope="col">Nombre Inscrit</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for lyceen in lyceens %}
+					{% for inscrit in inscritParAtelier %}
 					<tr> 
-						<td>{{lyceen["nom"]}}</td> 
-						<td>{{lyceen["1"]}}</td> 
+						<td> {{ inscrit["nom_atelier"] }} </td>
+						<td> {{ inscrit["nb_inscrit"] }} </td>
 					</tr> 
 					{% endfor %} 
 				</tbody>
