@@ -2,7 +2,101 @@
 
 {% block title %}Liste des ateliers{% endblock %}
 
+{% block stylesheets %}
+<style>
+     #liste {
+          margin-top: 35px;
+     }
+
+     h2 {
+          padding: 10px;
+          color: #0c4a6e;
+     }
+
+     table {
+          width: 90%;
+          margin: auto;
+     }
+
+     #entete {
+          background-color: #2C3E50;
+          border: 5px solid #2C3E50;
+     }
+
+     #entete tr th, #corps tr {
+          color: #FFFFFF;
+     }
+
+     #entete tr th, #corps tr td {
+          padding: 10px;
+     }
+
+     #corps{
+          border: 5px solid #2C3E50
+     }
+
+     #corps tr {
+          cursor: pointer;
+     }
+
+
+
+     #corps tr td a {
+          text-decoration: none;
+          color: #1a2530;
+     }
+</style>
+{% endblock %}
+
 {% block body %}
      <div {{ vue_component('Navigation') }}></div>
-     <div {{ vue_component('ListeAtelier') }}></div>
+
+
+     <div id="liste">
+          <h2> Voici une liste de tous les ateliers </h2>
+
+          <table>
+               <thead id="entete">
+               <tr>
+                    <th>Nom de l'atelier</th>
+                    <th>Secteur</th>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Intervenant</th>
+                    <th>Salle</th>
+               </tr>
+               </thead>
+
+               <tbody id="corps">
+               {% for atelier in ateliers %}
+                    <tr>
+                         <td>
+                              <a href="/detail_atelier/{{ atelier.id }}"> {{ atelier.nomAtelier}} </a>
+                         </td>
+                         <td>
+                              <a href="/detail_atelier/{{ atelier.id }}"> {{ atelier.secteur.nom }} </a>
+                         </td>
+                         <td>
+                              <a href="/detail_atelier/{{ atelier.id }}"> {{ atelier.dateAtelier | date("d/m/Y") }} </a>
+                         </td>
+                         <td>
+                              <a href="/detail_atelier/{{ atelier.id }}">{{ atelier.dateAtelier | localizeddate('none', 'none', null, null, 'HH:MM') }}</a>
+                         </td>
+                         <td> <a href="/detail_atelier/{{ atelier.id }}">
+                                   {% for intervenant in atelier.intervenant %}
+                                        {{ intervenant.firstName }} {{ intervenant.lastName }}
+                                   {% endfor %}
+                              </a>
+                         </td>
+                         <td> <a href="/detail_atelier/{{ atelier.id }}"> {{ atelier.salle.nom}} </a> </td>
+                         <td>
+                              <a href="/detail_atelier/{{ atelier.id }}" class="btn btn-primary text-white" id="bouton">
+                                   détails
+                              </a>
+                         </td>
+                    </tr>
+               {% endfor %}
+               </tbody>
+          </table>
+     </div>
 {% endblock %}

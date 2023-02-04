@@ -4,17 +4,15 @@ namespace App\Form;
 
 use App\Entity\Lyceen;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ParticiperFormType extends AbstractType
+class DesinscriptionFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-             //->add('Participer', SubmitType::class)
-             //->add('desinscrire', SubmitType::class)
+            //->add('email')
         ;
     }
 
