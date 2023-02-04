@@ -20,18 +20,7 @@ class IntervenantCrudController extends UserCrudController
         return array_merge(parent::configureFields($pageName), [
             IdField::new('id')->hideOnForm(),
             TextField::new('company'),
-            AssociationField::new('ateliers'),
         ]);
     }
-
-    /*
-    public function configureFields(string $pageName): iterable
-    {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
-    }
-    */
+    
 }

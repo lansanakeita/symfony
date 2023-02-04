@@ -6,6 +6,7 @@ use App\Repository\LyceenRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 
 #[ORM\Entity(repositoryClass: LyceenRepository::class)]
 class Lyceen extends User
@@ -18,14 +19,15 @@ class Lyceen extends User
     #[ORM\ManyToOne]
     private ?Lycee $lycee = null;
 
-    #[ORM\ManyToOne(inversedBy: 'lyceens')]
-    private ?User $user = null;
-
     #[ORM\ManyToMany(targetEntity: Atelier::class, mappedBy: 'lyceen')]
     private Collection $ateliers;
 
     #[ORM\ManyToOne(inversedBy: 'lyceens')]
     private ?Section $section = null;
+
+    #[ORM\ManyToOne(inversedBy: 'lyceens')]
+    #[ORM\JoinColumn(nullable: True)]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -46,18 +48,6 @@ class Lyceen extends User
     public function setLycee(?Lycee $lycee): self
     {
         $this->lycee = $lycee;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }
@@ -94,6 +84,11 @@ class Lyceen extends User
         return parent::getFirstName() . " " . parent::getLastName();
     }
 
+    public function getIdP()
+    {
+        return parent::getId();
+    }
+
     public function getSection(): ?Section
     {
         return $this->section;
@@ -105,5 +100,29 @@ class Lyceen extends User
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
     
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 }
