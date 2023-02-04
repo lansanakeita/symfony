@@ -6,8 +6,13 @@
 {% block body %}
      <div {{ vue_component('Navigation') }}></div>
 
-
      <div id="liste">
+
+          <div class="text-center">
+               {% for message in app.flashes('success') %}
+                    <div class="alert alert-danger"> {{ message }}</div>
+               {% endfor %}
+          </div>
           <h2> Voici une liste de tous les ateliers </h2>
 
           <table>

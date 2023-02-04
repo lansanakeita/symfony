@@ -86,7 +86,7 @@
 			
 		{% else %}
 
-			{% if ateliers is defined %}
+			{% if ateliers is not null and  app.user.ateliers | length > 0 %}
 				<hr>
 				<h1> Mes Ateliers</h1>
 				<table class="table table-bordered">
