@@ -24,7 +24,6 @@ class RegistrationFormType extends AbstractType
             ->add('lastName')
             ->add('email')
             ->add('phone')
-            
            
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
