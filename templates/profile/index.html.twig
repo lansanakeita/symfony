@@ -13,7 +13,7 @@
 			<h1>Profil de {{ app.user.firstName }} {{ app.user.lastName }}</h1>
 		</div>
 		
-		{% if is_granted('ROLE_ADMIN') %}
+		{% if is_granted('ROLE_ADMIN') %} 
 			<div id="espace" class="col-xs1">Nom :</div>
 			<div id="espace" class="col-xs3">{{ app.user.lastName }}</div>
 			<div id="espace" class="col-xs1">Prénom :</div>
@@ -22,26 +22,35 @@
 			<div id="espace" class="col-xs3">{{ app.user.email }}</div>
 			<div id="espace" class="col-xs1">Téléphone :</div>
 			<div id="espace" class="col-xs3">{{ app.user.phone }}</div>
-		{% else %}
-		<div id="espace" class="col-xs1">Nom :</div>
-		<div id="espace" class="col-xs3">{{ app.user.lastName }}</div>
-		<div id="espace" class="col-xs1">Prénom :</div>
-		<div id="espace" class="col-xs3">{{ app.user.firstName }}</div>
-		<div id="espace" class="col-xs1">Email :</div>
-		<div id="espace" class="col-xs3">{{ app.user.email }}</div>
-    	<div id="espace" class="col-xs1">Téléphone :</div>
-		<div id="espace" class="col-xs3">{{ app.user.phone }}</div>
-		<div id="espace" class="col-xs1">Section :</div>
-		<div id="espace" class="col-xs3">{{ app.user.section }}</div>
-		<div id="espace" class="col-xs1">Lycée :</div>
-		<div id="espace" class="col-xs3">{{ app.user.lycee }}</div>
+		{% elseif  is_granted('ROLE_INTERVENANT') %}
+			<div id="espace" class="col-xs1">Nom :</div>
+			<div id="espace" class="col-xs3">{{ app.user.lastName }}</div>
+			<div id="espace" class="col-xs1">Prénom :</div>
+			<div id="espace" class="col-xs3">{{ app.user.firstName }}</div>
+			<div id="espace" class="col-xs1">Email :</div>
+			<div id="espace" class="col-xs3">{{ app.user.email }}</div>
+			<div id="espace" class="col-xs1">Téléphone :</div>
+			<div id="espace" class="col-xs3">{{ app.user.phone }}</div>
+		{% elseif  is_granted('ROLE_LYCEEN') %}
+			<div id="espace" class="col-xs1">Nom :</div>
+			<div id="espace" class="col-xs3">{{ app.user.lastName }}</div>
+			<div id="espace" class="col-xs1">Prénom :</div>
+			<div id="espace" class="col-xs3">{{ app.user.firstName }}</div>
+			<div id="espace" class="col-xs1">Email :</div>
+			<div id="espace" class="col-xs3">{{ app.user.email }}</div>
+			<div id="espace" class="col-xs1">Téléphone :</div>
+			<div id="espace" class="col-xs3">{{ app.user.phone }}</div>
+			<div id="espace" class="col-xs1">Section :</div>
+			<div id="espace" class="col-xs3">{{ app.user.section }}</div>
+			<div id="espace" class="col-xs1">Lycée :</div>
+			<div id="espace" class="col-xs3">{{ app.user.lycee }}</div>
 		{% endif %}
 		
 	</div>
 
 	<div class="grix xs4 container">
 		<div class="col-xs4">
-
+		
 		{% if is_granted('ROLE_ADMIN') %}
 			<hr>
 			
@@ -83,10 +92,8 @@
 					{% endfor %} 
 				</tbody>
 			</table>
-			
-		{% else %}
-
-			{% if ateliers is not null and  app.user.ateliers | length > 0 %}
+		{% elseif  is_granted('ROLE_LYCEEN') or  is_granted('ROLE_INTERVENANT') %}
+			{% if ateliers is not null and  app.user.ateliers | length >0 %}
 				<hr>
 				<h1> Mes Ateliers</h1>
 				<table class="table table-bordered">
@@ -123,11 +130,9 @@
 						{% endfor %}  
 					</tbody>
 				</table>
-
 			{% endif %}
 
 		{% endif %}
-			
 		</div>
 	</div>
 		
