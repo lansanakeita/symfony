@@ -19,6 +19,7 @@ class LyceenCrudController extends UserCrudController
         return array_merge(parent::configureFields($pageName), [
             AssociationField::new('lycee'),
             AssociationField::new('section'),
+            
         ]);
     }
 }

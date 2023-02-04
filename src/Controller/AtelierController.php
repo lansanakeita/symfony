@@ -57,10 +57,16 @@ class AtelierController extends AbstractController
 
 
         if ($form->isSubmitted()) {
-            $this->getUser()->addAtelier($atelier);
-            $entityManager->persist($this->getUser());
-            $entityManager->flush();
-            $this->addFlash('success', 'Inscription effectué avec succès');
+            if( $this->getUser()){
+                $this->getUser()->addAtelier($atelier);
+                $entityManager->persist($this->getUser());
+                $entityManager->flush();
+                $this->addFlash('success', 'Inscription effectué avec succès');
+            }
+            else{
+                $this->addFlash('danger', 'Veuillez vous connectez pour participer !!!');
+            }
+           
         }
 
         $form_desinscrire = $this->createForm(DesinscriptionFormType::class, $this->getUser());
@@ -70,8 +76,8 @@ class AtelierController extends AbstractController
             $this->getUser()->removeAtelier($atelier);
             $entityManager->persist($this->getUser());
             $entityManager->flush();
-            $this->addFlash('success', 'Désinscription réussie');
-            return $this->redirectToRoute('app_list_atelier');
+            $this->addFlash('danger', 'Désinscription réussie');
+            // return $this->redirectToRoute('app_list_atelier');
         }
 
         return $this->render('atelier/detail.html.twig', [

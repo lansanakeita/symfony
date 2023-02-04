@@ -21,7 +21,7 @@ class ParticiperFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Lyceen::class,
+            'data_class' => NULL,
         ]);
     }
 }
