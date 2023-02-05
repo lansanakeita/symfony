@@ -16,14 +16,22 @@
 		<div id="example-sidenav" class="sidenav large fixed">
 			
 			<div id="elt"> 
-				<a href="{{path('app_home')}}">Accueil</a>
-				<a href="{{path('app_list_atelier')}}">Liste des ateliers</a>
-				<a href="{{path('app_logout')}}" id="deco">Déconnexion</a>
-
-				{% if is_granted('ROLE_ADMIN') %}
-					<a href="{{path('admin')}}" id="deco">Dashboard</a>
-				{% endif %}
 				
+				{% if is_granted('ROLE_ADMIN') %}
+					<a href="{{path('app_home')}}">Accueil</a>
+					<a href="{{path('app_list_atelier')}}">Liste des ateliers</a>
+					<a href="{{path('admin')}}" id="deco">Dashboard</a>
+					<a href="{{path('app_logout')}}" id="deco">Déconnexion</a>
+				{% elseif is_granted('ROLE_INTERVENANT') %}
+					<a href="{{path('app_home')}}">Accueil</a>
+					<a href="{{path('app_list_atelier')}}">Liste des ateliers</a>
+					<a href="{{path('app_logout')}}" id="deco">Déconnexion</a>
+				{% else %}
+					<a href="{{path('app_home')}}">Accueil</a>
+					<a href="{{path('app_list_atelier')}}">Liste des ateliers</a>
+					<a href="{{path('app_questionnaire')}}" id="deco">Questionnaire</a>
+					<a href="{{path('app_logout')}}" id="deco">Déconnexion</a>
+				{% endif %}
 			</div>
 		</div>
 		<main>

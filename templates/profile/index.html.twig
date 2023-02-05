@@ -4,14 +4,23 @@
 
 {% block body %}
 	<div class="grix xs4 container">
-		{% for message in app.flashes('message') %}
+		{% for message in app.flashes('success') %}
 			<div class="col-xs4">
 				<div class="p-3 my-2 rounded-2 success">{{message}}</div>
 			</div>
 		{% endfor %}
+
 		<div class="col-xs4">
 			<h1>Profil de {{ app.user.firstName }} {{ app.user.lastName }}</h1>
+
+			<div class="text-center">
+               {% for message in app.flashes('success') %}
+                    <div class="alert alert-danger"> {{ message }}</div>
+               {% endfor %}
+          </div>
 		</div>
+
+		
 		
 		{% if is_granted('ROLE_ADMIN') %} 
 			<div id="espace" class="col-xs1">Nom :</div>

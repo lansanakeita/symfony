@@ -82,6 +82,24 @@
                 </div>
             </div>
 
+             <div class="d-flex w-100">
+                <div class="w-25 text-decoration-underline">
+                    Activité :
+                </div>
+                <div class="w-50 text-capitalize d-flex align-items-center justify-content-start text-info">
+                   {% for metier in atelier.metier %}
+                   
+                        {% for activite in metier.activite %}
+                       
+                            <div class="text-capitalize d-flex align-items-center justify-content-start text-info">
+                                {{ activite.nomActivite}}
+                            </div>
+                        {% endfor %}
+                       
+                    {% endfor %}
+                </div>
+            </div>
+
             {% if atelier.urlRessource != null %}
                 <div class="d-flex w-100">
                     <div class="w-25 text-decoration-underline">
