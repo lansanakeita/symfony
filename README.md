@@ -7,8 +7,12 @@
 
 # run app
 1. [ ] _`symfony server:start`_
-ou
+or
 1. [ ] _`php -S localhost:8000 -t public`_
+
+# migrate schema in database
+1. [ ] _`php bin/console make:migration`_
+1. [ ] _`php bin/console doctrine:migrations:migrate`_
 
 # encrypt data
 1. [ ] _`php bin/console encrypt:data`_
