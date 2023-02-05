@@ -263,26 +263,23 @@ table {
 	color: #1a2530;
 }
 
-
-#formulaire_question {
-	width: 60%;
-	height: 60%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 15px;
-
+#titre_1_home {
+	color: #FFFFFF; backdrop-filter: blur(5px);
 }
 
-#bouton_formulaire {
-	width: 30%;
-	margin: auto;
-	background-color: #2C3E50;
-	padding: 12px;
-	border-radius: 10px;
-	color: #FFFFFF;
-	text-align: center;
+#header_home {
+	position: relative;
+	width: 100%;
+	height: auto;
+	min-height: 35rem;
+	padding: 15rem 0;
+	background-image: url('pictures/th.jpeg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-size: cover;
 }
 
-#titre_questionnaire {
-	margin-top: 50px;
+#h2_home {
+	backdrop-filter: blur(5px);
 }

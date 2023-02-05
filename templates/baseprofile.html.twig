@@ -18,9 +18,6 @@
 			<div id="elt"> 
 				<a href="{{path('app_home')}}">Accueil</a>
 				<a href="{{path('app_list_atelier')}}">Liste des ateliers</a>
-				{% if is_granted('ROLE_LYCEEN') %}
-					<a href="{{path('app_questionnaire')}}">Questionnaire de satisfaction</a>
-				{% endif %}
 				<a href="{{path('app_logout')}}" id="deco">Déconnexion</a>
 
 				{% if is_granted('ROLE_ADMIN') %}
