@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Service;
+use App\Repository\LyceenRepository;
 use App\Repository\UserRepository;
 
 
@@ -9,7 +10,7 @@ class EncryptService
  
     private $repository;
 
-    public function __construct(UserRepository $repository){
+    public function __construct(LyceenRepository $repository){
 
          $this->repository = $repository;
 
