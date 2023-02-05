@@ -29,10 +29,14 @@ class Lyceen extends User
     #[ORM\JoinColumn(nullable: True)]
     private ?User $user = null;
 
+    #[ORM\ManyToMany(targetEntity: Reponse::class, mappedBy: 'lyceen')]
+    private Collection $reponses;
+
     public function __construct()
     {
         parent::__construct();
         $this->ateliers = new ArrayCollection();
+        $this->reponses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,6 +126,33 @@ class Lyceen extends User
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reponse>
+     */
+    public function getReponses(): Collection
+    {
+        return $this->reponses;
+    }
+
+    public function addReponse(Reponse $reponse): self
+    {
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses->add($reponse);
+            $reponse->addLyceen($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): self
+    {
+        if ($this->reponses->removeElement($reponse)) {
+            $reponse->removeLyceen($this);
+        }
 
         return $this;
     }

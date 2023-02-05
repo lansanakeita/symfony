@@ -17,8 +17,8 @@ class EditionParticipation
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $year = null;
 
-    // #[ORM\ManyToOne]
-    // private ?Intervenant $intervenant = null;
+    #[ORM\ManyToOne(inversedBy: 'editionParticipations')]
+    private ?Question $question = null;
 
     public function getId(): ?int
     {
@@ -48,4 +48,16 @@ class EditionParticipation
 
     //     return $this;
     // }
+
+    public function getQuestion(): ?Question
+    {
+        return $this->question;
+    }
+
+    public function setQuestion(?Question $question): self
+    {
+        $this->question = $question;
+
+        return $this;
+    }
 }
