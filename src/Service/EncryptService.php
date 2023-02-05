@@ -72,7 +72,6 @@ class EncryptService
                 $atelierToAssigned = $this->atelierRepository
                                           ->findBy(['nomAtelier' => $atelier["nom_atelier"]])[0];
                 $atelierToAssigned->setSalle($assignedRoom);
-                //$singleAtelier->setSalle($assignedRoom);
                 $this->atelierRepository->save($atelierToAssigned, true);
             }
     }

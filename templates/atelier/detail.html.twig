@@ -65,7 +65,13 @@
                     Salle :
                 </div>
                 <div class="w-50 text-capitalize d-flex align-items-center justify-content-start text-info">
-                    {{ atelier.salle.nom }}
+                    {% if atelier.salle is null %}
+                        <span class="text-danger">
+                            NA
+                        </span>
+                    {% else %}
+                        {{ atelier.salle.nom}}
+                    {% endif %}
                 </div>
             </div>
 
