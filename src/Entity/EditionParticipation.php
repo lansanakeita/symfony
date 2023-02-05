@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\EditionParticipationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,23 +14,8 @@ class EditionParticipation
     #[ORM\Column]
     private ?int $id = null;
 
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $annee = null;
-
-    #[ORM\ManyToOne(inversedBy: 'editionParticipations')]
-    private ?Questions $questions = null;
-
-    #[ORM\Column]
-    private ?bool $active_year = null;
-
-
-
-    public function __construct()
-    {
-    }
-
-
+    private ?\DateTimeInterface $year = null;
 
     // #[ORM\ManyToOne]
     // private ?Intervenant $intervenant = null;
@@ -42,6 +25,17 @@ class EditionParticipation
         return $this->id;
     }
 
+    public function getYear(): ?\DateTimeInterface
+    {
+        return $this->year;
+    }
+
+    public function setYear(\DateTimeInterface $year): self
+    {
+        $this->year = $year;
+
+        return $this;
+    }
 
     // public function getIntervenant(): ?Intervenant
     // {
@@ -54,45 +48,4 @@ class EditionParticipation
 
     //     return $this;
     // }
-
-    public function getAnnee(): ?\DateTimeInterface
-    {
-        return $this->annee;
-    }
-
-    public function setAnnee(\DateTimeInterface $annee): self
-    {
-        $this->annee = $annee;
-
-        return $this;
-    }
-
-    public function getQuestions(): ?Questions
-    {
-        return $this->questions;
-    }
-
-    public function setQuestions(?Questions $questions): self
-    {
-        $this->questions = $questions;
-
-        return $this;
-    }
-
-    public function isActiveYear(): ?bool
-    {
-        return $this->active_year;
-    }
-
-    public function setActiveYear(bool $active_year): self
-    {
-        $this->active_year = $active_year;
-
-        return $this;
-    }
-
-
-
-
-
 }
