@@ -4,6 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\EditionParticipation;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class EditionParticipationCrudController extends AbstractCrudController
 {
@@ -12,14 +16,14 @@ class EditionParticipationCrudController extends AbstractCrudController
         return EditionParticipation::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            IdField::new('id')->hideOnForm(),
+            AssociationField::new('questions'),
+            BooleanField::new('active_year')
         ];
     }
-    */
+
 }
