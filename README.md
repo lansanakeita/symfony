@@ -1,5 +1,5 @@
 # installer les dépendances
-1. [ ] composer install
+1. [ ] _`composer install`_
 
 # setup vue
 1. [ ] _`yarn install --force`_
