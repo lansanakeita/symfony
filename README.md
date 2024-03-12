@@ -8,7 +8,7 @@
 # run app
 1. [ ] _`symfony server:start`_
 or
-1. [ ] _`php -S localhost:8000 -t public`_
+1. [ ] _`composer start`_
 
 # migrate schema in database
 1. [ ] _`php bin/console make:migration`_

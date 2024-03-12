@@ -41,6 +41,7 @@
         "symfony/ux-vue": "^2.7",
         "symfony/validator": "6.0.*",
         "symfony/web-link": "6.0.*",
+        "symfony/webpack-encore-bundle": "^1.17",
         "symfony/yaml": "6.0.*",
         "twig/extensions": "^1.5",
         "twig/extra-bundle": "^2.12|^3.0",
